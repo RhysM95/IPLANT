@@ -1,0 +1,19 @@
+body 
+{
+    background-color: mediumpurple;
+}
+h1 
+{
+    color: mediumspringgreen;
+    margin-left: 20px;
+}
+h2 
+{
+    color: lightsalmon;
+    margin-left: 20px;
+}
+ul
+{
+    border:2px solid salmon;
+    margin-right: 400px;
+}
