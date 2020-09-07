@@ -2,11 +2,21 @@ $('#navbar').load('navbar.html');
 $('#footer').load('footer.html');
 
 const MQTT_URL = 'http://localhost:5001/system-control';
-const API_URL = 'https://api.rhysm95.vercel.app/api';
+const API_URL = 'http://localhost:5000/api';
 
 const currentUser = localStorage.getItem('name');
 
-if (currentUser) 
+// $.get(`${API_URL}/plants`).then(response =>
+// {
+//     response.forEach(plant =>
+//     {
+//         $('#plants tbody').append(`<tr><td>${plant.user}</td><td>${plant.name}</td><td>${plant.temp}</td><td>${plant.light}</td><td>${plant.humidity}</td><td>${plant.moisture}</td></tr>`);});
+// }).catch(error =>
+// {
+//     console.error(`Error: ${error}`);
+// });
+
+if (currentUser)
 {
     $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
     {
@@ -25,13 +35,19 @@ if (currentUser)
             {
                 response.map(sensorData => 
                 {
-                    $('#historyContent').append(`<tr><td>${sensorData.ts}</td><td>${sensorData.temp}</td><td>${sensorData.loc.lat}</td><td>${sensorData.loc.lon}</td></tr>`);
+                    $('#historyContent').append(`<tr>
+                    <td>${sensorData.temp}</td>
+                    <td>${sensorData.light}</td>
+                    <td>${sensorData.humidity}</td>
+                    <td>${sensorData.moisture}</td>
+                    </tr>`);
                 });
                 $('#historyModal').modal('show'); 
             });
         });
     }).catch(error => 
     {
+        console.log(currentUser);               //checking for currentuser data
         console.error(`Error: ${error}`);
     });
 }
@@ -48,13 +64,20 @@ $('#add-plant').on('click', () =>
 {
     const name = $('#name').val();
     const user = $('#user').val();
-    const sensorData = [];
+    const temp = $('#temp').val();
+    const light = $('#light').val();
+    const humidity = $('#humidity').val();
+    const moisture = $('#moisture').val();
     const body = 
     {
         name,
         user,
-        sensorData
+        temp,
+        light,
+        humidity,
+        moisture
     };
+
     $.post(`${API_URL}/plants`, body).then(response => 
     {
         location.href = '/';
@@ -64,7 +87,7 @@ $('#add-plant').on('click', () =>
     });
 });
 
-$('#system-contorl').on('click', function()
+$('#system-control').on('click', function()
 {
     const command = $('#command').val();
     const plantID = $('#plantID').val();
@@ -108,7 +131,7 @@ $('#login').on('click', () =>
         {
             localStorage.setItem('name', username);
             localStorage.setItem('isAuthenticated', true);
-            location.href = '/';
+            location.href = '/plant-data';
         } 
         else 
         {

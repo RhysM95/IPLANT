@@ -3,7 +3,7 @@ const express = require('express');
 const Plant = require('./models/plant'); 
 const User = require('./models/user'); 
 
-mongoose.connect("mongodb+srv://mcmillanr:deakin@cluster0.kw5ly.mongodb.net", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://mcmillanr:deakin@cluster0.kw5ly.mongodb.net/sit209", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -64,7 +64,7 @@ app.get('/api/users/:user/plant', (req, res) =>
 });
 
 /**
-* @api {get} /api/Plants All Plants An array of all Plants
+* @api {get} /api/Plants All Plants in array of all Plants
 * @apiGroup Plants
 * @apiSuccessExample {json} Success-Response:
 * [
