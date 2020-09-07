@@ -26,25 +26,29 @@ if (currentUser)
             <tr data-plant-id=${plant._id}>
             <td>${plant.user}</td>
             <td>${plant.name}</td>
+            <td>${plant.temp}</td>
+            <td>${plant.light}</td>
+            <td>${plant.humidity}</td>
+            <td>${plant.moisture}</td>
             </tr>`);
         });
-        $('#plants tbody tr').on('click', (e) => 
-        {
-            const plantId = e.currentTarget.getAttribute('data-plant-id');
-            $.get(`${API_URL}/plants/${plantId}/plant-history`).then(response => 
-            {
-                response.map(sensorData => 
-                {
-                    $('#historyContent').append(`<tr>
-                    <td>${sensorData.temp}</td>
-                    <td>${sensorData.light}</td>
-                    <td>${sensorData.humidity}</td>
-                    <td>${sensorData.moisture}</td>
-                    </tr>`);
-                });
-                $('#historyModal').modal('show'); 
-            });
-        });
+        // $('#plants tbody tr').on('click', (e) => 
+        // {
+        //     const plantId = e.currentTarget.getAttribute('data-plant-id');
+        //     $.get(`${API_URL}/plants/${plantId}/plant-history`).then(response => 
+        //     {
+        //         response.map(sensorData => 
+        //         {
+        //             $('#historyContent').append(`<tr>
+        //             <td>${sensorData.temp}</td>
+        //             <td>${sensorData.light}</td>
+        //             <td>${sensorData.humidity}</td>
+        //             <td>${sensorData.moisture}</td>
+        //             </tr>`);
+        //         });
+        //         $('#historyModal').modal('show'); 
+        //     });
+        // });
     }).catch(error => 
     {
         console.log(currentUser);               //checking for currentuser data

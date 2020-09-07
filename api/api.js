@@ -54,7 +54,7 @@ app.get('/api/test', (req, res) =>
     res.send('The API is working!');
 });
 
-app.get('/api/users/:user/plant', (req, res) => 
+app.get('/api/users/:user/plants', (req, res) => 
 {
     const { user } = req.params;
     Plant.find({ "user": user }, (err, plants) => 
@@ -105,7 +105,7 @@ app.get('/api/plants', (req, res) =>
         if (err == true) 
         {
             return res.send(err);
-        } 
+        }
         else 
         {
             return res.send(plants);
@@ -134,12 +134,15 @@ app.get('/api/plants/:plantId/plant-history', (req, res) =>
 
 app.post('/api/plants', (req, res) => 
 {
-    const { name, user, sensorData } = req.body;
+    const { name, user, temp, light, humidity, moisture } = req.body;
     const newplant = new Plant(
     {
         name,
         user,
-        sensorData
+        temp,
+        light,
+        humidity,
+        moisture
     });
     newplant.save(err => 
     {
