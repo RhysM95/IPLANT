@@ -13,25 +13,39 @@
         <div class="container">
             <div id="navbar"></div>
             <h1>System Control</h1>
-            <p></p>
+            <br>
+
 
             <div class="form-group">
-                <label for="command">Auto / Manual</label>
-                <p></p>
-                <label for="command">Space filler for control status</label>
-                <p></p>
-                <button class="btn btn-success" id="send-command">Auto</button>
-                <button class="btn btn-success" id="send-command">Manual</button>
-                <p></p>
-                <label for="command">Operate Water Valve</label>
-                <p></p>
+                <h2 for="command">Auto / Manual</h2>
+                <br>
+                <div id="myDIV">Currently in Auto Control</div>
+                <br>
+                <p><button onclick="myFunction()">Control Mode Toggle</button></p>
+                <br>
+                <!-- <button class="btn btn-success" id="auto">Auto</button>
+                <button class="btn btn-success" id="manual">Manual</button>
+                <br> -->
+                <br>
+                <h2 for="command">Operate Water Valve</h2>
+                <br>
                 <label for="command">Space filler for valve status</label>
-                <p></p>
-                <button class="btn btn-success" id="send-command">Open</button>
-                <button class="btn btn-success" id="send-command">Close</button>
-                <p></p>
+                <br>
+                <button class="btn btn-success" id="open">Open</button>
+                <button class="btn btn-success" id="close">Close</button>
+                <br>
             <div id="footer"></div>
         </div>   
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myDIV");
+              if (x.innerHTML === "Currently in Auto Control") {
+                x.innerHTML = "Currently in Manual Control";
+              } else {
+                x.innerHTML = "Currently in Auto Control";
+              }
+            }
+            </script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
