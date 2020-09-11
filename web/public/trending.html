@@ -48,13 +48,17 @@
                   <p></p>
                   <div style="width:500px;height:200px;border:1px solid #000;">Soil Moisture
                     <div class="ct-chart" id="chart4" style="height:90%;"></div>
+                  </div>
                 </div>
-              </div>
             </div>
+            
         </div>
+        <a class="weatherwidget-io" href="https://forecast7.com/en/n37d81144d96/melbourne/" data-label_1="MELBOURNE" data-label_2="WEATHER" data-theme="original" >MELBOURNE WEATHER</a>
+        
         <div class="container">
             <div id="footer"></div>
         </div>
+        <div style="margin-bottom: 50px;"></div> 
 
         <script type="text/javascript" src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.js"></script>
         <script>
@@ -102,6 +106,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="app.js"></script>
+        <script>
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+        </script>
 
     </body>
 </html>
