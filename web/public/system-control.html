@@ -14,18 +14,16 @@
             <div id="navbar"></div>
             <h1>System Control</h1>
             <br>
-
-
             <div class="form-group">
                 <h2 for="command">Auto / Manual</h2>
                 <br>
-                <div id="myDIV">Currently in Auto Control</div>
+                <div id="status">Currently in Auto Control</div>
                 <br>
-                <p><button onclick="myFunction()">Control Mode Toggle</button></p>
+                <div class="btn-group">
+                    <p><button class ="btn btn-success" id="auto" onclick="aFunction()" >Auto Mode </button></p>
+                    <p><button class ="btn btn-danger" id="manual" onclick="mFunction()" >Manual Mode </button></p>
+                </div>
                 <br>
-                <!-- <button class="btn btn-success" id="auto">Auto</button>
-                <button class="btn btn-success" id="manual">Manual</button>
-                <br> -->
                 <br>
                 <h2 for="command">Operate Water Valve</h2>
                 <br>
@@ -37,15 +35,40 @@
             <div id="footer"></div>
         </div>   
         <script>
-            function myFunction() {
-              var x = document.getElementById("myDIV");
-              if (x.innerHTML === "Currently in Auto Control") {
-                x.innerHTML = "Currently in Manual Control";
-              } else {
-                x.innerHTML = "Currently in Auto Control";
+            function myFunction() 
+            {
+              var status = document.getElementById("status");
+              var m_id = document.getElementById("manual");
+              var a_id = document.getElementById("auto");
+
+              if(m_id.clicked == true)
+              {
+                status.innerHTML = "Currently in Auto Control";  
+              }
+              else if(a_id.clicked == true)
+              {
+                status.innerHTML = "Currently in Manual Control";
               }
             }
-            </script>
+
+            function mFunction() 
+            {
+              var status = document.getElementById("status");
+              if (status.innerHTML === "Currently in Auto Control") 
+              {
+                status.innerHTML = "Currently in Manual Control";
+              }
+            }
+
+            function aFunction() 
+            {
+              var status = document.getElementById("status");
+              if (status.innerHTML === "Currently in Manual Control") 
+              {
+                status.innerHTML = "Currently in Auto Control";
+              }
+            }
+        </script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
