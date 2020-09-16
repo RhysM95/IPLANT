@@ -3,8 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Plant = require('./models/plant'); 
-const randomCoordinates = require('random-coordinates');
-const rand = require('random-int');
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 const app = express();
 const port = process.env.PORT || 5001;
@@ -28,7 +26,7 @@ app.use((req, res, next) =>
 
 client.on('connect', () => 
 {
-    client.subscribe('/sensorData');
+    client.subscribe('/IPLANT/1/');
     console.log('mqtt connected');
 });
 
@@ -37,27 +35,37 @@ client.on('message', (topic, message) =>
 {
     console.log(`Received message on ${topic}: ${message}`);
 
-    if (topic == '/sensorData') 
-    {
+    if (topic == '/IPLANT/1/') 
+    { 
         const data = JSON.parse(message);
-        Plant.findOne({"name": data.plantId }, (err, plant) => 
+        Plant.findOne({"id": data.id}, (err, plant) => 
         {
+            console.log(data);
+            console.log(plant);
             if (err) 
             {
                 console.log(err)
             }
-            const { sensorData } = plant;
-            const { ts, loc, temp } = data;
-            sensorData.push({ ts, loc, temp });
-            plant.sensorData = sensorData;
+            // else if (plant.id == data.id)
+            // {
+            //     plant.temp = data.data.temp;
+            //     plant.light = data.data.light;
+            //     plant.humidity = data.data.hum;
+            //     plant.moisture = data.data.smoist;
+            // }
+            
+            // const { plantData } = plant;
+            // const { temp, light, hum, smoist } = data;
+            // plantData.push({ temp, light, hum, smoist });
+            // plant.plantData = plantData;
 
-            plant.save(err => 
-            {
-                if (err) 
-                {
-                    console.log(err)
-                }
-            });
+            // plant.save(err => 
+            // {
+            //     if (err) 
+            //     {
+            //         console.log(err)
+            //     }
+            // });
         });
     }
 });
@@ -113,20 +121,16 @@ app.post('/send-command', (req, res) =>
 * 'Cannot destructure property 'sensorData' of 'plant' as it is null'
 */
 
-app.put('/sensor-data', (req, res) => 
-{
-    const { plantId } = req.body;
-    const [lat, lon] = randomCoordinates().split(", ");
-    const ts = new Date().getTime();
-    const loc = { lat, lon };
-    const temp = rand(20, 50);
-    const topic = `/sensorData`;
-    const message = JSON.stringify({ plantId, ts, loc, temp });
-    client.publish(topic, message, () => 
-    {
-        res.send(`published new message to ${plantId}`);
-    });
-}); 
+// app.put('/plant-data', (req, res) => 
+// {
+//     const { plantId } = req.body;
+//     const topic = `/sensorData`;
+//     const message = JSON.stringify({ plantId, temp });
+//     client.publish(topic, message, () => 
+//     {
+//         res.send(`published new message to ${plantId}`);
+//     });
+// }); 
    
 app.listen(port, () => 
 {

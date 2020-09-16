@@ -35,7 +35,7 @@ function sendData() {
 	console.log("Sending to topic: " + topic);
 	console.log("Data: " + JSON.stringify(plantData));
 	client.publish(topic, JSON.stringify(plantData), () => {
-		console.log('published new message');
+		console.log('published new message topic');
 	});
 }
 
