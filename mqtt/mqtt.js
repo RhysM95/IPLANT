@@ -38,34 +38,27 @@ client.on('message', (topic, message) =>
     if (topic == '/IPLANT/1/') 
     { 
         const data = JSON.parse(message);
-        Plant.findOne({"id": data.id}, (err, plant) => 
+        Plant.findOne({"id": data.id }, (err, plant) => 
         {
-            console.log(data);
             console.log(plant);
             if (err) 
             {
                 console.log(err)
             }
-            // else if (plant.id == data.id)
-            // {
-            //     plant.temp = data.data.temp;
-            //     plant.light = data.data.light;
-            //     plant.humidity = data.data.hum;
-            //     plant.moisture = data.data.smoist;
-            // }
-            
-            // const { plantData } = plant;
-            // const { temp, light, hum, smoist } = data;
-            // plantData.push({ temp, light, hum, smoist });
-            // plant.plantData = plantData;
 
-            // plant.save(err => 
-            // {
-            //     if (err) 
-            //     {
-            //         console.log(err)
-            //     }
-            // });
+            plant.temp = data.data.temp;
+            plant.light = data.data.light;
+            plant.humidity = data.data.hum;
+            plant.moisture = data.data.smoist;
+
+            plant.save(err => 
+            {
+                if (err) 
+                {
+                    console.log(err)
+                }
+            });
+
         });
     }
 });

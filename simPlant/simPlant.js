@@ -7,7 +7,7 @@ const Math = require('mathjs');
 
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 
-var plantData = {"id": 0, "data":{"temp":0, "light":0, "hum":0, "smoist":0}};
+var plantData = {id: 0, data:{temp:0, light:0, hum:0, smoist:0}};
 
 var rl = readline.createInterface({
   input: process.stdin,
