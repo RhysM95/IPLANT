@@ -6,17 +6,26 @@ const API_URL = 'http://localhost:5000/api';
 
 const currentUser = localStorage.getItem('name');
 
-// $.get(`${API_URL}/plants`).then(response =>
-// {
-//     response.forEach(plant =>
-//     {
-//         $('#plants tbody').append(`<tr><td>${plant.user}</td><td>${plant.name}</td><td>${plant.temp}</td><td>${plant.light}</td><td>${plant.humidity}</td><td>${plant.moisture}</td></tr>`);});
-// }).catch(error =>
-// {
-//     console.error(`Error: ${error}`);
-// });
-
-if (currentUser)
+if(currentUser == "admin")
+{
+    $.get(`${API_URL}/plants`).then(response =>
+    {
+        response.forEach(plant =>
+        {
+            $('#plants tbody').append(`<tr>
+            <td>${plant.user}</td>
+            <td>${plant.name}</td>
+            <td>${plant.temp}</td>
+            <td>${plant.light}</td>
+            <td>${plant.humidity}</td>
+            <td>${plant.moisture}</td>
+            </tr>`);});
+    }).catch(error =>
+    {
+        console.error(`Error: ${error}`);
+    });
+}
+else if (currentUser)
 {
     $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
     {
@@ -32,26 +41,9 @@ if (currentUser)
             <td>${plant.moisture}</td>
             </tr>`);
         });
-        // $('#plants tbody tr').on('click', (e) => 
-        // {
-        //     const plantId = e.currentTarget.getAttribute('data-plant-id');
-        //     $.get(`${API_URL}/plants/${plantId}/plant-history`).then(response => 
-        //     {
-        //         response.map(sensorData => 
-        //         {
-        //             $('#historyContent').append(`<tr>
-        //             <td>${sensorData.temp}</td>
-        //             <td>${sensorData.light}</td>
-        //             <td>${sensorData.humidity}</td>
-        //             <td>${sensorData.moisture}</td>
-        //             </tr>`);
-        //         });
-        //         $('#historyModal').modal('show'); 
-        //     });
-        // });
+        
     }).catch(error => 
     {
-        console.log(currentUser);               //checking for currentuser data
         console.error(`Error: ${error}`);
     });
 }

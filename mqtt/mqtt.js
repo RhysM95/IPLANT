@@ -26,41 +26,45 @@ app.use((req, res, next) =>
 
 client.on('connect', () => 
 {
+    client.subscribe('/IPLANT/0/');
     client.subscribe('/IPLANT/1/');
+    client.subscribe('/IPLANT/2/');
+    client.subscribe('/IPLANT/3/');
+    client.subscribe('/IPLANT/4/');
+    client.subscribe('/IPLANT/5/');
+    client.subscribe('/IPLANT/6/');
+    client.subscribe('/IPLANT/7/');
+    client.subscribe('/IPLANT/8/');
+    client.subscribe('/IPLANT/9/');
+    client.subscribe('/IPLANT/10/');
     console.log('mqtt connected');
 });
-
 
 client.on('message', (topic, message) => 
 {
     console.log(`Received message on ${topic}: ${message}`);
 
-    if (topic == '/IPLANT/1/') 
-    { 
-        const data = JSON.parse(message);
-        Plant.findOne({"id": data.id }, (err, plant) => 
+    const data = JSON.parse(message);
+    Plant.findOne({"id": data.id }, (err, plant) => 
+    {
+        if (err) 
         {
-            console.log(plant);
+            console.log(err)
+        }
+
+        plant.temp = data.data.temp;
+        plant.light = data.data.light;
+        plant.humidity = data.data.hum;
+        plant.moisture = data.data.smoist;
+
+        plant.save(err => 
+        {
             if (err) 
             {
                 console.log(err)
             }
-
-            plant.temp = data.data.temp;
-            plant.light = data.data.light;
-            plant.humidity = data.data.hum;
-            plant.moisture = data.data.smoist;
-
-            plant.save(err => 
-            {
-                if (err) 
-                {
-                    console.log(err)
-                }
-            });
-
         });
-    }
+    });
 });
 
 /**
@@ -95,35 +99,6 @@ app.post('/send-command', (req, res) =>
         res.send('published new message');
     });
 });
-
-/**
-* @api {put} /mqtt/sensor-data New sensor data
-* @apiGroup Plants
-* @apiSuccessExample {json} Success-Response:
-* {
-* "plantId":"Bob's iPhone",
-* "ts":1597018894324,
-* "loc":{
-* "lat":"64.11657",
-* "lon":"-82.76068"
-* },
-* "temp":49
-* }
-* 'successfully added plant and data'
-* @apiErrorExample {string} Error-Response:
-* 'Cannot destructure property 'sensorData' of 'plant' as it is null'
-*/
-
-// app.put('/plant-data', (req, res) => 
-// {
-//     const { plantId } = req.body;
-//     const topic = `/sensorData`;
-//     const message = JSON.stringify({ plantId, temp });
-//     client.publish(topic, message, () => 
-//     {
-//         res.send(`published new message to ${plantId}`);
-//     });
-// }); 
    
 app.listen(port, () => 
 {
