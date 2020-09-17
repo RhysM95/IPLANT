@@ -24,14 +24,13 @@ rl.question(">>What is the Plant ID?  ", function(answer) {
    setInterval(sendData, 2000)
 });
 
-
-
 function sendData() {
 	const topic = `/IPLANT/${plantID}/`;
-	plantData.data.temp = randomSensorValue();
-	plantData.data.light = randomSensorValue();
-	plantData.data.hum = randomSensorValue();
-	plantData.data.smoist = randomSensorValue();
+
+	plantData.data.temp = randomSensorValue(-40, 80);
+	plantData.data.light = randomSensorValue(0, 20000);
+	plantData.data.hum = randomSensorValue(0, 100);
+	plantData.data.smoist = randomSensorValue(0, 950);
 	console.log("Sending to topic: " + topic);
 	console.log("Data: " + JSON.stringify(plantData));
 	client.publish(topic, JSON.stringify(plantData), () => {
@@ -45,6 +44,6 @@ function connectMQTT(){
 	});
 }
 
-function randomSensorValue(){
-	return Math.floor(Math.random()*101);
+function randomSensorValue(low, hi){
+	return Math.floor(Math.random(low, hi));
 }

@@ -15,10 +15,10 @@ if(currentUser == "admin")
             $('#plants tbody').append(`<tr>
             <td>${plant.user}</td>
             <td>${plant.name}</td>
-            <td>${plant.temp}</td>
-            <td>${plant.light}</td>
-            <td>${plant.humidity}</td>
-            <td>${plant.moisture}</td>
+            <td>${plant.temp + '°'}</td>
+            <td>${plant.light + ' LUX'}</td>
+            <td>${plant.humidity + ' %RH'}</td>
+            <td>${plant.moisture + ' MU'}</td>
             </tr>`);});
     }).catch(error =>
     {
@@ -35,10 +35,10 @@ else if (currentUser)
             <tr data-plant-id=${plant._id}>
             <td>${plant.user}</td>
             <td>${plant.name}</td>
-            <td>${plant.temp}</td>
-            <td>${plant.light}</td>
-            <td>${plant.humidity}</td>
-            <td>${plant.moisture}</td>
+            <td>${plant.temp + '°'}</td>
+            <td>${plant.light + ' LUX'}</td>
+            <td>${plant.humidity + ' %RH'}</td>
+            <td>${plant.moisture + ' MU'}</td>
             </tr>`);
         });
         
