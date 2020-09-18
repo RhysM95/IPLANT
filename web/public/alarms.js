@@ -104,12 +104,13 @@ Plant.findOne({"type": data.id }, (err, plant) =>
             hum_al(humLo, humHi);
             moist_al(moistLo, moistHi);
         break;
-    }
+    };
+});
 
 function light_al(lo, hi) 
 {
     light_lo = false;
-    light_hi = flase;
+    light_hi = false;
     if (plantData.data.light <= lo)
     {
         light_lo = true;
@@ -119,10 +120,11 @@ function light_al(lo, hi)
         light_hi = true;
     };
 }
+
 function temp_al(lo, hi) 
 {
     temp_lo = false;
-    temp_hi = flase;
+    temp_hi = false;
     if (plantData.data.temp <= lo)
     {
         temp_lo = true;
@@ -132,10 +134,11 @@ function temp_al(lo, hi)
         temp_hi = true;
     };
 }
+
 function hum_al(lo, hi) 
 {
     hum_lo = false;
-    hum_hi = flase;
+    hum_hi = false;
     if (plantData.data.hum <= lo)
     {
         hum_lo = true;
@@ -145,10 +148,11 @@ function hum_al(lo, hi)
         hum_hi = true;
     };
 }
+
 function moist_al(lo, hi) 
 {
     moist_lo = false;
-    moist_hi = flase;
+    moist_hi = false;
     if (plantData.data.smoist <= lo)
     {
         moist_lo = true;
