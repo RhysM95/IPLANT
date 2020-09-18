@@ -54,7 +54,31 @@
             
         </div>
         <p></p>
-        <a class="weatherwidget-io" href="https://forecast7.com/en/n37d81144d96/melbourne/" data-label_1="MELBOURNE" data-label_2="WEATHER" data-theme="original" >MELBOURNE WEATHER</a>
+        <div>
+          <select class="browser-default custom-select" id="test">
+            <option selected value="hideEm">City</option>
+            <option value="Adelaide">Adelaide</option>
+            <option value="Canberra">Canberra</option>
+            <option value="Brisbane">Brisbane</option>
+            <option value="Darwin">Darwin</option>
+            <option value="Hobart">Hobart</option>
+            <option value="Melbourne">Melbourne</option>
+            <option value="Perth">Perth</option>
+            <option value="Sydney">Sydney</option>
+          </select>
+    
+          <button onClick="UpdateValue()">Update</button>
+          <a></a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n37d81144d96/melbourne/" data-label_1="MELBOURNE" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="melbWeather">MELBOURNE WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n34d93138d60/adelaide/" data-label_1="ADELAIDE" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="adelWeather">ADELAIDE WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n33d87151d21/sydney/" data-label_1="SYDNEY" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="sydWeather">SYDNEY WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n42d88147d33/hobart/" data-label_1="HOBART" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="hobWeather">HOBART WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n12d46130d85/darwin/" data-label_1="DARWIN" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="darwWeather">DARWIN WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n31d95115d86/perth/" data-label_1="PERTH" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="perWeather">PERTH WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n35d31149d12/canberra/" data-label_1="CANBERRA" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="canbWeather">CANBERRA WEATHER</a>
+          <a class="weatherwidget-io" href="https://forecast7.com/en/n27d47153d03/brisbane/" data-label_1="BRISBANE" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="brisWeather">BRISBANE WEATHER</a>
+        </div>
+        <!--<a class="weatherwidget-io" href="https://forecast7.com/en/n37d81144d96/melbourne/" data-label_1="MELBOURNE" data-label_2="WEATHER" data-theme="original" >MELBOURNE WEATHER</a>-->
         
         <div class="container">
             <div id="footer"></div>
@@ -109,6 +133,73 @@
         <script src="app.js"></script>
         <script>
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+        </script>
+        <script>
+          function UpdateValue(){
+            var temp=test.value;
+            if (temp=="Melbourne"){
+              hideAll();
+              showCity("melbWeather");
+            } 
+            else if (temp=="Adelaide"){
+              hideAll();
+              showCity("adelWeather");
+            }
+            else if (temp=="Sydney"){
+              hideAll();
+              showCity("sydWeather");
+            }
+            else if (temp=="Hobart"){
+              hideAll();
+              showCity("hobWeather");
+            }
+            else if (temp=="Darwin"){
+              hideAll();
+              showCity("darwWeather");
+            }
+            else if (temp=="Perth"){
+              hideAll();
+              showCity("perWeather");
+            }
+            else if (temp=="Canberra"){
+              hideAll();
+              showCity("canbWeather");
+            }
+            else if (temp=="Brisbane"){
+              hideAll();
+              showCity("brisWeather");
+            }
+               
+      
+            else hideAll();
+      
+            function hideAll(){
+              document.getElementById("melbWeather").style.visibility = "hidden";
+              document.getElementById("melbWeather").style.height = "0px";
+              document.getElementById("sydWeather").style.visibility = "hidden";
+              document.getElementById("sydWeather").style.height = "0px";
+              document.getElementById("adelWeather").style.visibility = "hidden";
+              document.getElementById("adelWeather").style.height = "0px";
+              document.getElementById("hobWeather").style.visibility = "hidden";
+              document.getElementById("hobWeather").style.height = "0px";
+              document.getElementById("brisWeather").style.visibility = "hidden";
+              document.getElementById("brisWeather").style.height = "0px";
+              document.getElementById("perWeather").style.visibility = "hidden";
+              document.getElementById("perWeather").style.height = "0px";
+              document.getElementById("darwWeather").style.visibility = "hidden";
+              document.getElementById("darwWeather").style.height = "0px";
+              document.getElementById("canbWeather").style.visibility = "hidden";
+              document.getElementById("canbWeather").style.height = "0px";
+            }
+            
+            function showCity(input){
+              document.getElementById(input).style.visibility = "visible";
+              document.getElementById(input).style.height = "200px";
+            }
+            
+            
+          }
+          
         </script>
 
     </body>
