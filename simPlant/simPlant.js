@@ -21,7 +21,7 @@ rl.question(">>What is the Plant ID?  ", function(answer) {
    plantData.id = plantID;
    rl.close();
    connectMQTT();
-   setInterval(sendData, 2000)
+   setInterval(sendData, 5000)
 });
 
 function sendData() {

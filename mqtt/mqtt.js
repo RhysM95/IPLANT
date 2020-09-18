@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Plant = require('./models/plant'); 
+const { collection } = require('./models/plant');
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 const app = express();
 const port = process.env.PORT || 5001;
@@ -56,7 +57,7 @@ client.on('message', (topic, message) =>
         plant.light = data.data.light;
         plant.humidity = data.data.hum;
         plant.moisture = data.data.smoist;
-
+        
         plant.save(err => 
         {
             if (err) 
