@@ -12,14 +12,37 @@ if(currentUser == "admin")
     {
         response.forEach(plant =>
         {
-            $('#plants tbody').append(`<tr>
-            <td>${plant.user}</td>
-            <td>${plant.name}</td>
-            <td>${plant.temp + '°'}</td>
-            <td>${plant.light + ' LUX'}</td>
-            <td>${plant.humidity + ' %RH'}</td>
-            <td>${plant.moisture + ' MU'}</td>
-            </tr>`);});
+            $('#plants tbody').append(`
+            <tr data-plant-id=${plant._id}>
+            <td>
+            <div class="card" style="width:200px">
+                <div class="card-body">
+                    <h4 class="card-title">${plant.name}</h4>
+                    <button class="btn btn-primary">See Plant History</a>
+                </div>
+            </div>
+            </td>
+            </tr>`
+            );
+        });
+
+        $('#plants tbody tr button').on('click', () => {
+            $.get(`${API_URL}/plants`).then(response => 
+            {
+                response.forEach((plant) => {
+                $('#historyContent').append(`
+                    <tr>
+                    <td>${plant.user}</td>
+                    <td>${plant.temp + '°'}</td>
+                    <td>${plant.light + ' LUX'}</td>
+                    <td>${plant.humidity + ' %RH'}</td>
+                    <td>${plant.moisture + ' MU'}</td>
+                    </tr>
+                `);
+                });
+                $('#historyModal').modal('show');
+            });
+        });
     }).catch(error =>
     {
         console.error(`Error: ${error}`);
@@ -33,13 +56,33 @@ else if (currentUser)
         {
             $('#plants tbody').append(`
             <tr data-plant-id=${plant._id}>
-            <td>${plant.user}</td>
-            <td>${plant.name}</td>
-            <td>${plant.temp + '°'}</td>
-            <td>${plant.light + ' LUX'}</td>
-            <td>${plant.humidity + ' %RH'}</td>
-            <td>${plant.moisture + ' MU'}</td>
+            <td>
+            <div class="card" style="width:200px">
+                <div class="card-body">
+                    <h4 class="card-title">${plant.name}</h4>
+                    <button class="btn btn-primary">See Plant History</a>
+                </div>
+            </div>
+            </td>
             </tr>`);
+        });
+
+        $('#plants tbody tr button').on('click', () => {
+            $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
+            {
+                response.forEach((plant) => {
+                $('#historyContent').append(`
+                    <tr>
+                    <td>${plant.user}</td>
+                    <td>${plant.temp + '°'}</td>
+                    <td>${plant.light + ' LUX'}</td>
+                    <td>${plant.humidity + ' %RH'}</td>
+                    <td>${plant.moisture + ' MU'}</td>
+                    </tr>
+                `);
+                });
+                $('#historyModal').modal('show');
+            });
         });
         
     }).catch(error => 
