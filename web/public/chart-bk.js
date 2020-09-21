@@ -1,4 +1,63 @@
-/* chart.js chart examples */
+
+$('#navbar').load('navbar.html');
+$('#footer').load('footer.html');
+/*
+const MQTT_URL = 'http://localhost:5001/system-control';
+const API_URL = 'http://localhost:5000/api';
+
+const currentUser = localStorage.getItem('name');
+
+if(currentUser == "admin")
+{
+    $.get(`${API_URL}/plants`).then(response =>
+    {
+        response.forEach(plant =>
+        {
+            $('#plants tbody').append(`<tr>
+            <td>${plant.user}</td>
+            <td>${plant.name}</td>
+            <td>${plant.temp + '°'}</td>
+            <td>${plant.light + ' LUX'}</td>
+            <td>${plant.humidity + ' %RH'}</td>
+            <td>${plant.moisture + ' MU'}</td>
+            </tr>`);});
+    }).catch(error =>
+    {
+        console.error(`Error: ${error}`);
+    });
+}
+else if (currentUser)
+{
+    $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
+    {
+        response.forEach((plant) => 
+        {
+            $('#plants tbody').append(`
+            <tr data-plant-id=${plant._id}>
+            <td>${plant.user}</td>
+            <td>${plant.name}</td>
+            <td>${plant.temp + '°'}</td>
+            <td>${plant.light + ' LUX'}</td>
+            <td>${plant.humidity + ' %RH'}</td>
+            <td>${plant.moisture + ' MU'}</td>
+            </tr>`);
+        });
+        
+    }).catch(error => 
+    {
+        console.error(`Error: ${error}`);
+    });
+}
+else 
+{
+    const path = window.location.pathname;
+    if (path !== '/login' && path !== '/registration') 
+    {
+        location.href = '/login';
+    }
+}
+
+/* chart.js chart examples **
 var cv = $("#chLine").get(0).getContext("2d");
 
 var mychart = new Chart(cv).Line(data);
@@ -32,3 +91,4 @@ var chartData = {
     ]
 };
 
+*/

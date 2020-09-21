@@ -78,7 +78,6 @@
           <a class="weatherwidget-io" href="https://forecast7.com/en/n35d31149d12/canberra/" data-label_1="CANBERRA" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="canbWeather">CANBERRA WEATHER</a>
           <a class="weatherwidget-io" href="https://forecast7.com/en/n27d47153d03/brisbane/" data-label_1="BRISBANE" data-label_2="WEATHER" data-theme="original" style="visibility:hidden" id="brisWeather">BRISBANE WEATHER</a>
         </div>
-        <!--<a class="weatherwidget-io" href="https://forecast7.com/en/n37d81144d96/melbourne/" data-label_1="MELBOURNE" data-label_2="WEATHER" data-theme="original" >MELBOURNE WEATHER</a>-->
         
         <div class="container">
             <div id="footer"></div>
@@ -86,121 +85,13 @@
         <div style="margin-bottom: 50px;"></div> 
 
         <script type="text/javascript" src="https://rawgit.com/gionkunz/chartist-js/master/dist/chartist.js"></script>
-        <script>
-          new Chartist.Line('#chart1', {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8],
-            series: [
-              [5, 9, 7, 8, 5, 3, 5, 4]
-            ]
-          }, {
-            low: 0,
-            showArea: false
-          });
-          
-          new Chartist.Line('#chart2', {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8],
-            series: [
-              [5, 5, 4,  9, 7, 8, 5, 3],
-              [7, 8, 2,  3, 5, 9, 7, 5]
-            ]
-          }, {
-            low: 0,
-            showArea: false
-          });
-          
-          new Chartist.Line('#chart3', {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8],
-            series: [
-              [5, 4, 5, 9, 7, 8, 5, 3]
-            ]
-          }, {
-            low: 0,
-            showArea: false
-          });
-          new Chartist.Line('#chart4', {
-            labels: [1, 2, 3, 4, 5, 6, 7, 8],
-            series: [
-              [5, 4, 5, 9, 7, 8, 5, 3]
-            ]
-          }, {
-            low: 0,
-            showArea: false
-          });
-        </script> 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="app.js"></script>
+        <script src="trending.js"></script>
         <script>
           !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
         </script>
-        <script>
-          function UpdateValue(){
-            var temp=test.value;
-            if (temp=="Melbourne"){
-              hideAll();
-              showCity("melbWeather");
-            } 
-            else if (temp=="Adelaide"){
-              hideAll();
-              showCity("adelWeather");
-            }
-            else if (temp=="Sydney"){
-              hideAll();
-              showCity("sydWeather");
-            }
-            else if (temp=="Hobart"){
-              hideAll();
-              showCity("hobWeather");
-            }
-            else if (temp=="Darwin"){
-              hideAll();
-              showCity("darwWeather");
-            }
-            else if (temp=="Perth"){
-              hideAll();
-              showCity("perWeather");
-            }
-            else if (temp=="Canberra"){
-              hideAll();
-              showCity("canbWeather");
-            }
-            else if (temp=="Brisbane"){
-              hideAll();
-              showCity("brisWeather");
-            }
-               
-      
-            else hideAll();
-      
-            function hideAll(){
-              document.getElementById("melbWeather").style.visibility = "hidden";
-              document.getElementById("melbWeather").style.height = "0px";
-              document.getElementById("sydWeather").style.visibility = "hidden";
-              document.getElementById("sydWeather").style.height = "0px";
-              document.getElementById("adelWeather").style.visibility = "hidden";
-              document.getElementById("adelWeather").style.height = "0px";
-              document.getElementById("hobWeather").style.visibility = "hidden";
-              document.getElementById("hobWeather").style.height = "0px";
-              document.getElementById("brisWeather").style.visibility = "hidden";
-              document.getElementById("brisWeather").style.height = "0px";
-              document.getElementById("perWeather").style.visibility = "hidden";
-              document.getElementById("perWeather").style.height = "0px";
-              document.getElementById("darwWeather").style.visibility = "hidden";
-              document.getElementById("darwWeather").style.height = "0px";
-              document.getElementById("canbWeather").style.visibility = "hidden";
-              document.getElementById("canbWeather").style.height = "0px";
-            }
-            
-            function showCity(input){
-              document.getElementById(input).style.visibility = "visible";
-              document.getElementById(input).style.height = "200px";
-            }
-            
-            
-          }
-          
-        </script>
-
     </body>
 </html>
