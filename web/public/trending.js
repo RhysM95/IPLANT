@@ -6,6 +6,12 @@ if(currentUser == "admin")
 
         const plantID = [];
         const dataArray = []
+        const labelArray = [];
+        const tempArray  = [];
+        const lightArray = [];
+        const humArray = [];
+        const moistureArray = [];
+        
         response.forEach(plant =>
         {
             const plantArray = []
@@ -19,54 +25,46 @@ if(currentUser == "admin")
 
             dataArray.push(plantArray);
         });
-        console.log(plantID)
-        console.log(dataArray);
+        //console.log(plantID)
+        //console.log(dataArray);
 
-        const output = []
+        //const output = []
         plantID.forEach(element => {
-            console.log(element);
+            //console.log(element);
             const result = dataArray.filter(plant_id => element == plant_id[0]);
-            console.log(result);
-            output.push(result)
+            //console.log(result);
+            //output.push(result)
+
+            const arr1 = [];
+            const arr2 = [];
+            const arr3 = [];
+            const arr4 = [];
+
+            result.forEach(element => {
+                //label will be plantID element value
+                arr1.push(element[1]);  //temp
+                arr2.push(element[2]);  //??
+                arr3.push(element[3]);
+                arr4.push(element[4]);
+            });
+
+            labelArray.push(1);
+            tempArray.push(arr1);
+            lightArray.push(arr2);
+            humArray.push(arr3);
+            moistureArray.push(arr4);
+
+            console.log(tempArray);
+
         });
-        console.log(output);
         
-
-
-    }).catch(error =>
-    {
-        console.error(`Error: ${error}`);
-    });
-    
-
-    $.get(`${API_URL}/plants`).then(response =>
-        {
-        const labelArray = [];
-        const tempArray  = [];
-        const lightArray = [];
-        const humArray = [];
-        const moistureArray = [];
-        var i = 0;  //will become date after update
-        
-        response.forEach(plant =>
-        {
-            //plantID.forEach(element => addData(element))
-            
-            
-            labelArray.push(i++);
-            tempArray.push(plant.temp);
-            lightArray.push(plant.light);
-            humArray.push(plant.humidity);
-            moistureArray.push(plant.moisture);
-        });
-
         new Chartist.Line('#chart1', {
             labels: labelArray,
             series: [
                 tempArray
             ]
         }, {
-            low: 0,
+            low: -40,
             showArea: false
         });
 
@@ -99,7 +97,6 @@ if(currentUser == "admin")
             low: 0,
             showArea: false
         });
-
     }).catch(error =>
     {
         console.error(`Error: ${error}`);
