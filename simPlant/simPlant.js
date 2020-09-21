@@ -9,6 +9,14 @@ const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 
 var plantData = {id: 0, data:{temp:0, light:0, hum:0, smoist:0}};
 
+//how to stringify date and time from mqtt output
+/*
+var today = new Date();
+var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date+' '+time;
+*/
+
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
@@ -27,6 +35,7 @@ rl.question(">>What is the Plant ID?  ", function(answer) {
 function sendData() {
 	const topic = `/IPLANT/${plantID}/`;
 
+	plantData.data.time = Date.now();
 	plantData.data.temp = randomSensorValue(-40, 80);
 	plantData.data.light = randomSensorValue(0, 20000);
 	plantData.data.hum = randomSensorValue(0, 100);
