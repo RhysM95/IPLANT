@@ -57,6 +57,7 @@ client.on('message', (topic, message) =>
         plant.light = data.data.light;
         plant.humidity = data.data.hum;
         plant.moisture = data.data.smoist;
+        plant.time = data.data.time;
         
         plant.save(err => 
         {

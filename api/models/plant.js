@@ -8,6 +8,7 @@ module.exports = mongoose.model('Plant', new mongoose.Schema(
     temp: String,
     light: String,
     humidity: String,
-    moisure: String
+    moisure: String,
+    time: String
 
 }));
