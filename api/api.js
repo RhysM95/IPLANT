@@ -54,6 +54,29 @@ app.get('/api/test', (req, res) =>
     res.send('The API is working!');
 });
 
+/**
+* @api {get} /api/users/:user/Plants All Plants in array from user
+* @apiGroup Plants
+* @apiSuccessExample {json} Success-Response:
+* [
+* {
+* "_id":"5f55a18838d2d48608b36acc",
+* "id":0,
+* "type":6,
+* "name":"Basil",
+* "user":"Floor_1",
+* "temp":"48",
+* "light":"6839",
+* "humidity":"84",
+* "moisture":"72"
+* }
+* ]
+* @apiErrorExample {json} Error-Response:
+* {
+* "User does not exist"
+* }
+*/
+
 app.get('/api/users/:user/plants', (req, res) => 
 {
     const { user } = req.params;
@@ -64,38 +87,36 @@ app.get('/api/users/:user/plants', (req, res) =>
 });
 
 /**
-* @api {get} /api/Plants All Plants in array of all Plants
+* @api {get} /api/Plants All Plants in array from plants
 * @apiGroup Plants
 * @apiSuccessExample {json} Success-Response:
 * [
 * {
-* "_id": "dsohsdohsdofhsofhosfhsofh",
-* "name": "Mary's iPhone",
-* "user": "mary",
-* "sensorData": [
-* {
-* "ts": "1529542230",
-* "temp": 12,
-* "loc": {
-* "lat": -37.84674,
-* "lon": 145.115113
-* }
+* "_id":"5f55a18838d2d48608b36ad0",
+* "id":3,
+* "type":6,
+* "name":"Basil",
+* "user":"Floor_2",
+* "temp":"-6",
+* "light":"4846",
+* "humidity":"17",
+* "moisture":"62"
 * },
 * {
-* "ts": "1529572230",
-* "temp": 17,
-* "loc": {
-* "lat": -37.850026,
-* "lon": 145.117683
-* }
-* }
-* ]
+* "_id":"5f55a18838d2d48608b36acd",
+* "id":2,
+* "type":2,
+* "name":"Suculent",
+* "user":"Floor_3",
+* "temp":"43",
+* "light":"6274",
+* "humidity":"7",
+* "moisture":"10"
 * }
 * ]
 * @apiErrorExample {json} Error-Response:
-* {
-* "User does not exist"
-* }
+* [
+* ]
 */
 
 app.get('/api/plants', (req, res) => 
@@ -134,9 +155,10 @@ app.get('/api/plants/:plantId/plant-history', (req, res) =>
 
 app.post('/api/plants', (req, res) => 
 {
-    const { name, user, temp, light, humidity, moisture } = req.body;
+    const { type, name, user, temp, light, humidity, moisture } = req.body;
     const newplant = new Plant(
     {
+        type,
         name,
         user,
         temp,
