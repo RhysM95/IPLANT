@@ -7,7 +7,7 @@ const Math = require('mathjs');
 
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 
-var plantData = {id: 0, data:{temp:0, light:0, hum:0, smoist:0, time:0}};
+var plantData = {id: 0, data:{temp:0, light:0, humidity:0, moisture:0, time:0}};
 
 //how to stringify date and time 
 /*
@@ -29,7 +29,7 @@ rl.question(">>What is the Plant ID?  ", function(answer) {
    plantData.id = plantID;
    rl.close();
    connectMQTT();
-   setInterval(sendData, 5000)
+   setInterval(sendData, 10000)
 });
 
 function sendData() {
@@ -38,8 +38,8 @@ function sendData() {
 	plantData.data.time = Date.now();
 	plantData.data.temp = randomSensorValue(-40, 80);
 	plantData.data.light = randomSensorValue(0, 20000);
-	plantData.data.hum = randomSensorValue(0, 100);
-	plantData.data.smoist = randomSensorValue(0, 950);
+	plantData.data.humidity = randomSensorValue(0, 100);
+	plantData.data.moisture = randomSensorValue(0, 950);
 	console.log("Sending to topic: " + topic);
 	console.log("Data: " + JSON.stringify(plantData));
 	client.publish(topic, JSON.stringify(plantData), () => {

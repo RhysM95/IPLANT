@@ -5,10 +5,10 @@ module.exports = mongoose.model('Plant', new mongoose.Schema(
     type: Number,
     name: String,
     user: String,
-    temp: String,
-    light: String,
-    humidity: String,
-    moisure: String,
-    time: String
-
+    plantData: Array
+    // temp: String,
+    // light: String,
+    // humidity: String,
+    // moisure: String,
+    // time: String
 }));

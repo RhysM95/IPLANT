@@ -33,10 +33,10 @@ if(currentUser == "admin")
                 $('#historyContent').append(`
                     <tr>
                     <td>${plant.user}</td>
-                    <td>${plant.temp + '°'}</td>
-                    <td>${plant.light + ' LUX'}</td>
-                    <td>${plant.humidity + ' %RH'}</td>
-                    <td>${plant.moisture + ' MU'}</td>
+                    <td>${plantData.temp + '°'}</td>
+                    <td>${plantData.light + ' LUX'}</td>
+                    <td>${plantData.humidity + ' %RH'}</td>
+                    <td>${plantData.moisture + ' MU'}</td>
                     </tr>
                 `);
                 });
@@ -74,10 +74,10 @@ else if (currentUser)
                 $('#historyContent').append(`
                     <tr>
                     <td>${plant.user}</td>
-                    <td>${plant.temp + '°'}</td>
-                    <td>${plant.light + ' LUX'}</td>
-                    <td>${plant.humidity + ' %RH'}</td>
-                    <td>${plant.moisture + ' MU'}</td>
+                    <td>${plantData.temp + '°'}</td>
+                    <td>${plantData.light + ' LUX'}</td>
+                    <td>${plantData.humidity + ' %RH'}</td>
+                    <td>${plantData.moisture + ' MU'}</td>
                     </tr>
                 `);
                 });
@@ -103,19 +103,27 @@ $('#add-plant').on('click', () =>
 {
     const name = $('#name').val();
     const user = $('#user').val();
-    const temp = $('#temp').val();
-    const light = $('#light').val();
-    const humidity = $('#humidity').val();
-    const moisture = $('#moisture').val();
+    const plantData = [];
+
     const body = 
     {
         name,
         user,
-        temp,
-        light,
-        humidity,
-        moisture
+        plantData
     };
+    // const temp = $('#temp').val();
+    // const light = $('#light').val();
+    // const humidity = $('#humidity').val();
+    // const moisture = $('#moisture').val();
+    // const body = 
+    // {
+    //     name,
+    //     user,
+    //     temp,
+    //     light,
+    //     humidity,
+    //     moisture
+    // };
 
     $.post(`${API_URL}/plants`, body).then(response => 
     {

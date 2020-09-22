@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const Plant = require('./models/plant'); 
-const { collection } = require('./models/plant');
 const client = mqtt.connect("mqtt://broker.hivemq.com:1883");
 const app = express();
 const port = process.env.PORT || 5001;
@@ -43,7 +42,7 @@ client.on('connect', () =>
 
 client.on('message', (topic, message) => 
 {
-    console.log(`Received message on ${topic}: ${message}`);
+    // console.log(`Received message on ${topic}: ${message}`);
 
     const data = JSON.parse(message);
     Plant.findOne({"id": data.id }, (err, plant) => 
@@ -53,11 +52,16 @@ client.on('message', (topic, message) =>
             console.log(err)
         }
 
-        plant.temp = data.data.temp;
-        plant.light = data.data.light;
-        plant.humidity = data.data.hum;
-        plant.moisture = data.data.smoist;
-        plant.time = data.data.time;
+        const { plantData } = plant;
+        const {temp, light, humidity, moisture, time } = data.data;
+        plantData.push({ temp, light, humidity, moisture, time });
+        plant.plantData = plantData;
+
+        // plant.temp = data.data.temp;
+        // plant.light = data.data.light;
+        // plant.humidity = data.data.hum;
+        // plant.moisture = data.data.smoist;
+        // plant.time = data.data.time;
         
         plant.save(err => 
         {

@@ -139,8 +139,8 @@ app.get('/api/plants/:plantId/plant-history', (req, res) =>
     const { plantId } = req.params;
     Plant.findOne({"_id": plantId }, (err, plants) => 
     {
-        const { sensorData } = plants;
-        return err ? res.send(err): res.send(sensorData);
+        const { plantData } = plants;
+        return err ? res.send(err): res.send(plantData);
     });
 });
 
@@ -155,16 +155,17 @@ app.get('/api/plants/:plantId/plant-history', (req, res) =>
 
 app.post('/api/plants', (req, res) => 
 {
-    const { type, name, user, temp, light, humidity, moisture } = req.body;
+    const { type, name, user, plantData } = req.body;
     const newplant = new Plant(
     {
         type,
         name,
         user,
-        temp,
-        light,
-        humidity,
-        moisture
+        plantData
+        // temp,
+        // light,
+        // humidity,
+        // moisture
     });
     newplant.save(err => 
     {
