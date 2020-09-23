@@ -15,10 +15,10 @@ if(currentUser == "admin")
             $('#plants tbody').append(`
             <tr data-plant-id=${plant._id}>
             <td>
-            <div class="card" style="width:200px">
+            <div class="card" style="width:140px">
                 <div class="card-body">
                     <h4 class="card-title">${plant.name}</h4>
-                    <button class="btn btn-primary">See Plant History</a>
+                    <h6 class="card-title">User: ${plant.user}</h6>
                 </div>
             </div>
             </td>
@@ -26,17 +26,18 @@ if(currentUser == "admin")
             );
         });
 
-        $('#plants tbody tr button').on('click', () => {
+        $('#plantHistory').on('click', () => {
             $.get(`${API_URL}/plants`).then(response => 
             {
                 response.forEach((plant) => {
                 $('#historyContent').append(`
                     <tr>
                     <td>${plant.user}</td>
-                    <td>${plantData.temp + '°'}</td>
-                    <td>${plantData.light + ' LUX'}</td>
-                    <td>${plantData.humidity + ' %RH'}</td>
-                    <td>${plantData.moisture + ' MU'}</td>
+                    <td>${plant.name}</td>
+                    <td>${plant.temp + '°'}</td>
+                    <td>${plant.light + ' LUX'}</td>
+                    <td>${plant.humidity + ' %RH'}</td>
+                    <td>${plant.moisture + ' MU'}</td>
                     </tr>
                 `);
                 });
@@ -57,27 +58,27 @@ else if (currentUser)
             $('#plants tbody').append(`
             <tr data-plant-id=${plant._id}>
             <td>
-            <div class="card" style="width:200px">
+            <div class="card" style="width:140px">
                 <div class="card-body">
                     <h4 class="card-title">${plant.name}</h4>
-                    <button class="btn btn-primary">See Plant History</a>
                 </div>
             </div>
             </td>
             </tr>`);
         });
 
-        $('#plants tbody tr button').on('click', () => {
+        $('#plantHistory').on('click', () => {
             $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
             {
                 response.forEach((plant) => {
                 $('#historyContent').append(`
                     <tr>
                     <td>${plant.user}</td>
-                    <td>${plantData.temp + '°'}</td>
-                    <td>${plantData.light + ' LUX'}</td>
-                    <td>${plantData.humidity + ' %RH'}</td>
-                    <td>${plantData.moisture + ' MU'}</td>
+                    <td>${plant.name}</td>
+                    <td>${plant.temp + '°'}</td>
+                    <td>${plant.light + ' LUX'}</td>
+                    <td>${plant.humidity + ' %RH'}</td>
+                    <td>${plant.moisture + ' MU'}</td>
                     </tr>
                 `);
                 });
