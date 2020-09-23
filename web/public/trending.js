@@ -14,6 +14,54 @@ if(currentUser == "admin")
         
         response.forEach(plant =>
         {
+            
+            if (plantID.indexOf(plant.id, 0) == -1) plantID.push(plant.id)
+            const ptempArray  = [];
+            const plightArray = [];
+            const phumArray = [];
+            const pmoistureArray = [];
+            const countArray = [0,0,0,0,0,0];
+
+            for (var i = 0; i < plant.plantData.length; i++){
+                //console.log(Date.now()-21600000);
+                if(plant.plantData[i].time > (Date.now() - 3600000)){ //600000
+                    //console.log(plant.plantData.time);
+                    //console.log(plant.id);
+                    //console.log(plant.plantData);
+                    //console.log(plant.plantData[i].temp);
+                    ptempArray.push(plant.plantData[i].temp);
+                    plightArray.push(plant.plantData[i].light);
+                    phumArray.push(plant.plantData[i].humidity);
+                    pmoistureArray.push(plant.plantData[i].moisture);
+                    //21600000 milli in 6 hours
+                } /*else if (plant.plantData[i].time > 600000 and? plant.plantData[i].time > 1200000){
+                        sum plant.plantData[i].time / average
+                        10 MIN VALUECOUNT ++
+                } ELSE IF {plant.plantData[i].time > 1200000 and? plant.plantData[i].time > 1800000
+
+                } ELSE{NOTHING}
+                average VALUES/VALUECOUNT
+
+                PUSH TO ARRAYS
+                */
+            }
+            var labelCount = 0;
+            if (labelCount < ptempArray.length) labelCount = ptempArray.length;
+            tempArray.push(ptempArray);
+            lightArray.push(plightArray);
+            humArray.push(phumArray);
+            moistureArray.push(pmoistureArray);
+            
+            for (var j = 0; j < labelCount; j++){
+                if((j % 600000) == 0){
+                    labelArray.push("ago");
+                }
+                else {
+                    labelArray.push("");
+                }
+                //labelArray.push(j);
+            }
+            /*
             const plantArray = []
 
             if (plantID.indexOf(plant.id, 0) == -1) plantID.push(plant.id)
@@ -24,11 +72,12 @@ if(currentUser == "admin")
             plantArray.push(plant.moisture);
 
             dataArray.push(plantArray);
+            */
         });
         //console.log(plantID)
         //console.log(dataArray);
 
-        //const output = []
+        /*const output = []
         plantID.forEach(element => {
             //console.log(element);
             const result = dataArray.filter(plant_id => element == plant_id[0]);
@@ -43,10 +92,11 @@ if(currentUser == "admin")
             result.forEach(element => {
                 //label will be plantID element value
                 arr1.push(element[1]);  //temp
-                arr2.push(element[2]);  //??
-                arr3.push(element[3]);
-                arr4.push(element[4]);
+                arr2.push(element[2]);  //humidity
+                arr3.push(element[3]);  //light
+                arr4.push(element[4]);  //moisture
             });
+            //console.log(arr1);
 
             labelArray.push(1);
             tempArray.push(arr1);
@@ -54,15 +104,13 @@ if(currentUser == "admin")
             humArray.push(arr3);
             moistureArray.push(arr4);
 
-            console.log(tempArray);
+            //console.log(tempArray);
 
         });
-        
+        */
         new Chartist.Line('#chart1', {
             labels: labelArray,
-            series: [
-                tempArray
-            ]
+            series: tempArray
         }, {
             low: -40,
             showArea: false
@@ -70,9 +118,7 @@ if(currentUser == "admin")
 
         new Chartist.Line('#chart2', {
             labels: labelArray,
-            series: [
-                lightArray
-            ]
+            series: lightArray
         }, {
             low: 0,
             showArea: false
@@ -80,9 +126,7 @@ if(currentUser == "admin")
 
         new Chartist.Line('#chart3', {
             labels: labelArray,
-            series: [
-                humArray
-            ]
+            series: humArray
         }, {
             low: 0,
             showArea: false
@@ -90,9 +134,7 @@ if(currentUser == "admin")
 
         new Chartist.Line('#chart4', {
             labels: labelArray,
-            series: [
-                moistureArray
-            ]
+            series: moistureArray
         }, {
             low: 0,
             showArea: false
