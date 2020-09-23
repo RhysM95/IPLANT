@@ -3,111 +3,108 @@ if(currentUser == "admin")
     //const plantID = [];
     $.get(`${API_URL}/plants`).then(response =>
     {
-
         const plantID = [];
-        const dataArray = []
-        const labelArray = [];
         const tempArray  = [];
         const lightArray = [];
         const humArray = [];
         const moistureArray = [];
-        
+        var labelArray = [];
+        var increment = 0;      //900000
+
+        for (var i = 0; i < 8; i++){
+            labelArray.push(formatted_time(new Date(Date.now() - increment)));
+            increment += 900000;
+            //console.log("H");
+        }
+        //console.log (labelArray);
+
         response.forEach(plant =>
         {
             
             if (plantID.indexOf(plant.id, 0) == -1) plantID.push(plant.id)
-            const ptempArray  = [];
-            const plightArray = [];
-            const phumArray = [];
-            const pmoistureArray = [];
-            const countArray = [0,0,0,0,0,0];
+            const ptempArray  = [0,0,0,0,0,0,0,0];
+            const plightArray = [0,0,0,0,0,0,0,0];
+            const phumArray = [0,0,0,0,0,0,0,0];
+            const pmoistureArray = [0,0,0,0,0,0,0,0];
+            const countArray = [0,0,0,0,0,0,0,0];
+            const sumTempArray = [0,0,0,0,0,0,0,0];
+            const sumLightArray = [0,0,0,0,0,0,0,0];
+            const sumHumArray = [0,0,0,0,0,0,0,0];
+            const sumMoistureArray = [0,0,0,0,0,0,0,0];
+
 
             for (var i = 0; i < plant.plantData.length; i++){
-                //console.log(Date.now()-21600000);
-                if(plant.plantData[i].time > (Date.now() - 3600000)){ //600000
-                    //console.log(plant.plantData.time);
-                    //console.log(plant.id);
-                    //console.log(plant.plantData);
-                    //console.log(plant.plantData[i].temp);
-                    ptempArray.push(plant.plantData[i].temp);
-                    plightArray.push(plant.plantData[i].light);
-                    phumArray.push(plant.plantData[i].humidity);
-                    pmoistureArray.push(plant.plantData[i].moisture);
+                if(plant.plantData[i].time > (Date.now() - 900000)){ 
                     //21600000 milli in 6 hours
-                } /*else if (plant.plantData[i].time > 600000 and? plant.plantData[i].time > 1200000){
-                        sum plant.plantData[i].time / average
-                        10 MIN VALUECOUNT ++
-                } ELSE IF {plant.plantData[i].time > 1200000 and? plant.plantData[i].time > 1800000
+                    //900000 milli in 15min
 
-                } ELSE{NOTHING}
-                average VALUES/VALUECOUNT
-
-                PUSH TO ARRAYS
-                */
-            }
-            var labelCount = 0;
-            if (labelCount < ptempArray.length) labelCount = ptempArray.length;
-            tempArray.push(ptempArray);
-            lightArray.push(plightArray);
-            humArray.push(phumArray);
-            moistureArray.push(pmoistureArray);
-            
-            for (var j = 0; j < labelCount; j++){
-                if((j % 600000) == 0){
-                    labelArray.push("ago");
+                    countArray[0]++;
+                    sumTempArray[0]+= plant.plantData[i].temp;
+                    sumLightArray[0]+= plant.plantData[i].light;
+                    sumHumArray[0]+= plant.plantData[i].humidity;
+                    sumMoistureArray[0]+= plant.plantData[i].moisture;
+                   
+                }else if (plant.plantData[i].time > (Date.now() - 1800000)){
+                    countArray[1]++;
+                    sumTempArray[1]+= plant.plantData[i].temp;
+                    sumLightArray[1]+= plant.plantData[i].light;
+                    sumHumArray[1]+= plant.plantData[i].humidity;
+                    sumMoistureArray[1]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 2400000)){
+                    countArray[2]++;
+                    sumTempArray[2]+= plant.plantData[i].temp;
+                    sumLightArray[2]+= plant.plantData[i].light;
+                    sumHumArray[2]+= plant.plantData[i].humidity;
+                    sumMoistureArray[2]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 3000000)){
+                    countArray[3]++;
+                    sumTempArray[3]+= plant.plantData[i].temp;
+                    sumLightArray[3]+= plant.plantData[i].light;
+                    sumHumArray[3]+= plant.plantData[i].humidity;
+                    sumMoistureArray[3]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 3600000)){
+                    countArray[4]++;
+                    sumTempArray[4]+= plant.plantData[i].temp;
+                    sumLightArray[4]+= plant.plantData[i].light;
+                    sumHumArray[4]+= plant.plantData[i].humidity;
+                    sumMoistureArray[4]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 4200000)){
+                    countArray[5]++;
+                    sumTempArray[5]+= plant.plantData[i].temp;
+                    sumLightArray[5]+= plant.plantData[i].light;
+                    sumHumArray[5]+= plant.plantData[i].humidity;
+                    sumMoistureArray[5]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 4800000)){
+                    countArray[6]++;
+                    sumTempArray[6]+= plant.plantData[i].temp;
+                    sumLightArray[6]+= plant.plantData[i].light;
+                    sumHumArray[6]+= plant.plantData[i].humidity;
+                    sumMoistureArray[6]+= plant.plantData[i].moisture;
+                } else if (plant.plantData[i].time > (Date.now() - 5400000)){
+                    countArray[7]++;
+                    sumTempArray[7]+= plant.plantData[i].temp;
+                    sumLightArray[7]+= plant.plantData[i].light;
+                    sumHumArray[7]+= plant.plantData[i].humidity;
+                    sumMoistureArray[7]+= plant.plantData[i].moisture;
                 }
-                else {
-                    labelArray.push("");
+                console.log(countArray);
+                //console.log(sumTempArray);
+
+                for (var j = 0; j < countArray.length; j++){
+                    ptempArray[j] = sumTempArray[j]/countArray[j];
+                    plightArray[j] = sumLightArray[j]/countArray[j];
+                    phumArray[j] = sumHumArray[j]/countArray[j];
+                    pmoistureArray[j] = sumMoistureArray[j]/countArray[j];
                 }
-                //labelArray.push(j);
+                //console.log(ptempArray);
+
+                tempArray.push(ptempArray);
+                lightArray.push(plightArray);
+                humArray.push(phumArray);
+                moistureArray.push(pmoistureArray);
             }
-            /*
-            const plantArray = []
-
-            if (plantID.indexOf(plant.id, 0) == -1) plantID.push(plant.id)
-            plantArray.push(plant.id);
-            plantArray.push(plant.temp);
-            plantArray.push(plant.light);
-            plantArray.push(plant.humidity);
-            plantArray.push(plant.moisture);
-
-            dataArray.push(plantArray);
-            */
         });
-        //console.log(plantID)
-        //console.log(dataArray);
-
-        /*const output = []
-        plantID.forEach(element => {
-            //console.log(element);
-            const result = dataArray.filter(plant_id => element == plant_id[0]);
-            //console.log(result);
-            //output.push(result)
-
-            const arr1 = [];
-            const arr2 = [];
-            const arr3 = [];
-            const arr4 = [];
-
-            result.forEach(element => {
-                //label will be plantID element value
-                arr1.push(element[1]);  //temp
-                arr2.push(element[2]);  //humidity
-                arr3.push(element[3]);  //light
-                arr4.push(element[4]);  //moisture
-            });
-            //console.log(arr1);
-
-            labelArray.push(1);
-            tempArray.push(arr1);
-            lightArray.push(arr2);
-            humArray.push(arr3);
-            moistureArray.push(arr4);
-
-            //console.log(tempArray);
-
-        });
-        */
+        
         new Chartist.Line('#chart1', {
             labels: labelArray,
             series: tempArray
@@ -165,6 +162,10 @@ else
     {
         location.href = '/login';
     }
+}
+function formatted_time(d)
+{
+   return (d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds());
 }
 
 function UpdateValue(){
