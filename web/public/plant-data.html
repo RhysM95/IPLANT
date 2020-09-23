@@ -7,53 +7,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>IPLANT</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-
-        <style> 
-        
-        /* Styling h1 tag */ 
-        h1 { 
-            color: green;
-            text-align: left;
-        }
-        /* Styling For Modal */
-        body {
-            text-align: center;
-        }
-        </style> 
     </head>
-
     <body>
         <div class="container">
             <div id="navbar"></div>
-            <p>
-                <h1>Plants
-                <button style="float: right;" class="btn btn-primary" id="plantHistory">See Plant History</button>
-                </h1>
-            </p>
+            <h1>Plants </h1> 
             <table id="plants" class="table">
                 <thead>
                     <tr>
+                    <th>User</th>
+                    <th>Plant</th>
+                    <th>Temperature</th>
+                    <th>Light Intensity</th>
+                    <th>Humidity</th>
+                    <th>Soil Moisture</th>
+                    <th> <button class="btn btn-success" onClick="window.location.reload();">Refresh Page</button> </th>
+
                     </tr>
                     </thead>
                     <tbody></tbody>
             </table>
-        
-        <!-- Modal -->
+        </div>
+        <!-- Modal
         <div class="modal fade" id="historyModal">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="myModalLabel" id="modalTitle ">Plant History</h3>
-                        <button class="close" data-dismiss="modal"> 
-                            × 
-                        </button>
+                        <h5 class="modal-title">Plant History</h5>
                     </div>
+                    <div class="modal-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>User</th>
-                                    <th>Plant Name</th>
+                                    <th>Time</th>
                                     <th>Temperature</th>
+                                    <th>Latitude</th>
+                                    <th>Longitude</th>
                                     <th>Light Intensity</th>
                                     <th>Humidity</th>
                                     <th>Soil Moisture</th>
@@ -61,72 +50,10 @@
                             </thead>
                             <tbody id="historyContent"></tbody>
                         </table>
-                        <div class="modal-footer"></div>
-                        <div class="container">
-                            <div id="navbar"></div>
-                            <div class="form-group" >
-                                <h3 for="command">Auto / Manual</h3>
-                                <br>
-                                <div id="status">Currently in Auto Control</div>
-                                <br>
-                                <div class="btn-group">
-                                    <p><button class ="btn btn-success" id="auto" onclick="myFunction()" >Auto Mode </button></p>
-                                    <p><button class ="btn btn-danger" id="manual" onclick="myFunction()" >Manual Mode </button></p>
-                                </div>
-                                <br>
-                                <br>
-                                <h3 for="command">Operate Water Valve</h3>
-                                <br>
-                                <label for="command">Space filler for valve status</label>
-                                <br>
-                                <button class="btn btn-success" id="open">Open</button>
-                                <button class="btn btn-success" id="close">Close</button>
-                                <br><br><br>  
-                            <div id="footer"></div>
-                        </div>   
-                        <script>
-                            function myFunction() 
-                            {
-                              var status = document.getElementById("status");
-                              var m_id = document.getElementById("manual");
-                              var a_id = document.getElementById("auto");
-                
-                              if(m_id.clicked == true)
-                              {
-                                status.innerHTML = "Currently in Auto Control";  
-                              }
-                              else if(a_id.clicked == true)
-                              {
-                                status.innerHTML = "Currently in Manual Control";
-                              }
-                            }
-                
-                            function mFunction() 
-                            {
-                              var status = document.getElementById("status");
-                              if (status.innerHTML === "Currently in Auto Control") 
-                              {
-                                status.innerHTML = "Currently in Manual Control";
-                              }
-                            }
-                
-                            function aFunction() 
-                            {
-                              var status = document.getElementById("status");
-                              if (status.innerHTML === "Currently in Manual Control") 
-                              {
-                                status.innerHTML = "Currently in Auto Control";
-                              }
-                            }
-                        </script>
-                        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-                        <script src="app.js"></script>       
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> -->
         <div class="container">
             <div id="footer"></div>
         </div>   

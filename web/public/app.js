@@ -12,78 +12,44 @@ if(currentUser == "admin")
     {
         response.forEach(plant =>
         {
+            end = plant.plantData.length -1
+            
             $('#plants tbody').append(`
-            <tr data-plant-id=${plant._id}>
-            <td>
-            <div class="card" style="width:140px">
-                <div class="card-body">
-                    <h4 class="card-title">${plant.name}</h4>
-                    <h6 class="card-title">User: ${plant.user}</h6>
-                </div>
-            </div>
-            </td>
-            </tr>`
-            );
+            <tr> 
+            <td>${plant.user}</td>
+            <td>${plant.name}</td>
+            <td>${plant.plantData[end].temp + '°'}</td>
+            <td>${plant.plantData[end].light + ' LUX'}</td>
+            <td>${plant.plantData[end].humidity + ' %RH'}</td>
+            <td>${plant.plantData[end].moisture + ' MU'}</td>
+            </tr>
+            `);
         });
-
-        $('#plantHistory').on('click', () => {
-            $.get(`${API_URL}/plants`).then(response => 
-            {
-                response.forEach((plant) => {
-                $('#historyContent').append(`
-                    <tr>
-                    <td>${plant.user}</td>
-                    <td>${plant.name}</td>
-                    <td>${plant.temp + '°'}</td>
-                    <td>${plant.light + ' LUX'}</td>
-                    <td>${plant.humidity + ' %RH'}</td>
-                    <td>${plant.moisture + ' MU'}</td>
-                    </tr>
-                `);
-                });
-                $('#historyModal').modal('show');
-            });
-        });
+               
     }).catch(error =>
     {
         console.error(`Error: ${error}`);
     });
 }
+
 else if (currentUser)
 {
     $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
     {
         response.forEach((plant) => 
         {
+            end = plant.plantData.length -1
+
             $('#plants tbody').append(`
             <tr data-plant-id=${plant._id}>
-            <td>
-            <div class="card" style="width:140px">
-                <div class="card-body">
-                    <h4 class="card-title">${plant.name}</h4>
-                </div>
-            </div>
-            </td>
-            </tr>`);
-        });
-
-        $('#plantHistory').on('click', () => {
-            $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
-            {
-                response.forEach((plant) => {
-                $('#historyContent').append(`
-                    <tr>
-                    <td>${plant.user}</td>
-                    <td>${plant.name}</td>
-                    <td>${plant.temp + '°'}</td>
-                    <td>${plant.light + ' LUX'}</td>
-                    <td>${plant.humidity + ' %RH'}</td>
-                    <td>${plant.moisture + ' MU'}</td>
-                    </tr>
-                `);
-                });
-                $('#historyModal').modal('show');
-            });
+            <td>${plant.user}</td>
+            <td>${plant.name}</td>
+            <td>${plant.plantData[end].temp + '°'}</td>
+            <td>${plant.plantData[end].light + ' LUX'}</td>
+            <td>${plant.plantData[end].humidity + ' %RH'}</td>
+            <td>${plant.plantData[end].moisture + ' MU'}</td>
+            </tr>
+            `);
         });
         
     }).catch(error => 
@@ -112,19 +78,6 @@ $('#add-plant').on('click', () =>
         user,
         plantData
     };
-    // const temp = $('#temp').val();
-    // const light = $('#light').val();
-    // const humidity = $('#humidity').val();
-    // const moisture = $('#moisture').val();
-    // const body = 
-    // {
-    //     name,
-    //     user,
-    //     temp,
-    //     light,
-    //     humidity,
-    //     moisture
-    // };
 
     $.post(`${API_URL}/plants`, body).then(response => 
     {
@@ -139,7 +92,6 @@ $('#system-control').on('click', function()
 {
     const command = $('#command').val();
     const plantID = $('#plantID').val();
-
     $.post(`${MQTT_URL}/system-control`, { command, plantID });
 });
 
