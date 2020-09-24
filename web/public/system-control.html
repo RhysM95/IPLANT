@@ -17,55 +17,64 @@
             <div class="form-group">
                 <h2 for="command">Auto / Manual</h2>
                 <br>
-                <div id="status">Currently in Auto Control</div>
+                <div id="control-mode">Currently in Auto Control</div>
                 <br>
                 <div class="btn-group">
-                    <p><button class ="btn btn-success" id="auto" onclick="myFunction()" >Auto Mode </button></p>
-                    <p><button class ="btn btn-danger" id="manual" onclick="myFunction()" >Manual Mode </button></p>
+                    <p><button class ="btn btn-success" name="auto" onclick="controlFunction(0)" >Auto Mode </button></p>
+                    <p><button class ="btn btn-danger" name="manual" onclick="controlFunction(1)" >Manual Mode </button></p>
                 </div>
                 <br>
                 <br>
                 <h2 for="command">Operate Water Valve</h2>
                 <br>
-                <label for="command">Space filler for valve status</label>
+                <div id="valve-mode">Currently in Auto Control</div>
                 <br>
-                <button class="btn btn-success" id="open">Open</button>
-                <button class="btn btn-success" id="close">Close</button>
+                <div class="btn-group">
+                    <p><button class ="btn btn-success" name = "open" onclick="valveFunction(0)" >Open Valve </button></p>
+                    <p><button class ="btn btn-danger" name = "close" onclick="valveFunction(1)" >Close Valve </button></p>
+                </div>
                 <br>
             <div id="footer"></div>
         </div>   
         <script>
-            function myFunction() 
+            function controlFunction(mode) 
             {
-              var status = document.getElementById("status");
-              var m_id = document.getElementById("manual");
-              var a_id = document.getElementById("auto");
+              var status = document.getElementById("control-mode");
 
-              if(m_id.clicked == true)
+              if(mode == 0)
               {
-                status.innerHTML = "Currently in Auto Control";  
+                status.innerHTML = "Currently in Auto Control" 
+                document.getElementsByName("open")[0].disabled = true;
+                document.getElementsByName("auto")[0].disabled = true;
+                document.getElementsByName("close")[0].disabled = true; 
+                document.getElementsByName("manual")[0].disabled = false;
+
               }
-              else if(a_id.clicked == true)
+              else if(mode == 1)
               {
-                status.innerHTML = "Currently in Manual Control";
+                status.innerHTML = "Currently in Manual Control"
+                document.getElementsByName("open")[0].disabled = false;
+                document.getElementsByName("close")[0].disabled = false;
+                document.getElementsByName("auto")[0].disabled = false;
+                document.getElementsByName("manual")[0].disabled = true;
+
               }
             }
-
-            function mFunction() 
+            function valveFunction(mode) 
             {
-              var status = document.getElementById("status");
-              if (status.innerHTML === "Currently in Auto Control") 
+              var status = document.getElementById("valve-mode");
+
+              if(mode == 0)
               {
-                status.innerHTML = "Currently in Manual Control";
+                status.innerHTML = "Valve Currently Open";  
+                document.getElementsByName("open")[0].disabled = true;
+                document.getElementsByName("close")[0].disabled = false;
               }
-            }
-
-            function aFunction() 
-            {
-              var status = document.getElementById("status");
-              if (status.innerHTML === "Currently in Manual Control") 
+              else if(mode == 1)
               {
-                status.innerHTML = "Currently in Auto Control";
+                status.innerHTML = "Valve Currently Closed";
+                document.getElementsByName("open")[0].disabled = false;
+                document.getElementsByName("close")[0].disabled = true;
               }
             }
         </script>
