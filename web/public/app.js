@@ -10,10 +10,16 @@ if(currentUser == "admin")
 {
     $.get(`${API_URL}/plants`).then(response =>
     {
+
         response.forEach(plant =>
         {
             end = plant.plantData.length -1
-            
+            // if ((plant.plantData[end].temp) >= 20)
+            // {
+            //     temp_al = plant.plantData[end].temp.fontcolor("red");
+            // }
+            // else (temp_al = plant.plantData[end].temp)
+
             $('#plants tbody').append(`
             <tr> 
             <td>${plant.user}</td>
@@ -65,7 +71,7 @@ else
         location.href = '/login';
     }
 }
-   
+
 $('#add-plant').on('click', () => 
 {
     const name = $('#name').val();

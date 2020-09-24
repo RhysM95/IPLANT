@@ -1,0 +1,15 @@
+{
+  "name": "alarms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "alarms.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon alarms.js"
+  },
+  "author": "Rhys McMillan",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

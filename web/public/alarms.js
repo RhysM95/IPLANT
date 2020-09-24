@@ -1,164 +1,124 @@
-const Type = {
-    FLOWER: 1,
-    SUCCULANT: 2,
-    TREE: 3,
-    VEGETABLE: 4,
-    FRUIT: 5,
-    HERB: 6
-};
-Object.freeze(Type);
+// const lightHi = 12000;
+// const lightLo = 5000;
+// const tempHi = 50;
+// const tempLo = 20;
+// const humHi = 70;
+// const humLo = 20;
+// const moistHi = 600;
+// const moistLo = 200;
 
-const lightHi;
-const lightLo;
-const tempHi;
-const tempLo;
-const humHi;
-const humLo;
-const moistHi;
-const moistLo;
+// const currentUser = localStorage.getItem('name');
 
-Plant.findOne({"type": data.id }, (err, plant) => 
-{
-    switch (plant.type) {
-        case FLOWER:
-            lightHi = 12000;
-            lightLo = 2000;
-            tempHi = 30;
-            tempLo = 20;
-            humHi = 80;
-            humLo = 50;
-            moistHi = 700;
-            moistLo = 200;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-        case SUCCULANT:
-            lightHi = 10000;
-            lightLo = 5000;
-            tempHi = 80;
-            tempLo = 60;
-            humHi = 40;
-            humLo = 10;
-            moistHi = 500;
-            moistLo = 100;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-        case TREE:
-            lightHi = 15000;
-            lightLo = 3000;
-            tempHi = 40;
-            tempLo = 15;
-            humHi = 70;
-            humLo = 20;
-            moistHi = 600;
-            moistLo = 300;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-        case VEGETABLE:
-            lightHi = 8000;
-            lightLo = 4000;
-            tempHi = 50;
-            tempLo = 30;
-            humHi = 75;
-            humLo = 40;
-            moistHi = 500;
-            moistLo = 300;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-        case FRUIT:
-            lightHi = 10000;
-            lightLo = 4000;
-            tempHi = 30;
-            tempLo = 15;
-            humHi = 70;
-            humLo = 50;
-            moistHi = 600;
-            moistLo = 150;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-        case HERB:
-            lightHi = 15000;
-            lightLo = 6000;
-            tempHi = 250;
-            tempLo = 10;
-            humHi = 60;
-            humLo = 30;
-            moistHi = 500;
-            moistLo = 100;
-            light_al(lightLo, lightHi);
-            temp_al(tempLo, tempHi);
-            hum_al(humLo, humHi);
-            moist_al(moistLo, moistHi);
-        break;
-    };
-});
+// if(currentUser == "admin")
+// {
+//     $.get(`${API_URL}/plants`).then(response =>
+//     {
+//         response.forEach(plant =>
+//         {
+//             end = plant.plantData.length -1
+            
+//             $('#alarms tbody').append(`
+//             <tr> 
+//             <td>${plant.user}</td>
+//             <td>${plant.name}</td>
+//             <td>${plant.plantData[end].temp + '°'}</td>
+//             <td>${plant.plantData[end].light + ' LUX'}</td>
+//             <td>${plant.plantData[end].humidity + ' %RH'}</td>
+//             <td>${plant.plantData[end].moisture + ' MU'}</td>
+//             </tr>
+//             `);
+//         });
+               
+//     }).catch(error =>
+//     {
+//         console.error(`Error: ${error}`);
+//     });
+// }
 
-function light_al(lo, hi) 
-{
-    light_lo = false;
-    light_hi = false;
-    if (plantData.data.light <= lo)
-    {
-        light_lo = true;
-    };
-    if (plantData.data.light >= hi)
-    {
-        light_hi = true;
-    };
-}
+// else if (currentUser)
+// {
+//     $.get(`${API_URL}/users/${currentUser}/plants`).then(response => 
+//     {
+//         response.forEach((plant) => 
+//         {
+//             end = plant.plantData.length -1
 
-function temp_al(lo, hi) 
-{
-    temp_lo = false;
-    temp_hi = false;
-    if (plantData.data.temp <= lo)
-    {
-        temp_lo = true;
-    };
-    if (plantData.data.temp >= hi)
-    {
-        temp_hi = true;
-    };
-}
+//             $('#plants tbody').append(`
+//             <tr data-plant-id=${plant._id}>
+//             <td>${plant.user}</td>
+//             <td>${plant.name}</td>
+//             <td>${plant.plantData[end].temp + '°'}</td>
+//             <td>${plant.plantData[end].light + ' LUX'}</td>
+//             <td>${plant.plantData[end].humidity + ' %RH'}</td>
+//             <td>${plant.plantData[end].moisture + ' MU'}</td>
+//             </tr>
+//             `);
+//         });
+        
+//     }).catch(error => 
+//     {
+//         console.error(`Error: ${error}`);
+//     });
+// }
 
-function hum_al(lo, hi) 
-{
-    hum_lo = false;
-    hum_hi = false;
-    if (plantData.data.hum <= lo)
-    {
-        hum_lo = true;
-    };
-    if (plantData.data.hum >= hi)
-    {
-        hum_hi = true;
-    };
-}
+//     light_al(lightLo, lightHi);
+//     temp_al(tempLo, tempHi);
+//     hum_al(humLo, humHi);
+//     moist_al(moistLo, moistHi);
 
-function moist_al(lo, hi) 
-{
-    moist_lo = false;
-    moist_hi = false;
-    if (plantData.data.smoist <= lo)
-    {
-        moist_lo = true;
-    };
-    if (plantData.data.smoist >= hi)
-    {
-        moist_hi = true;
-    };
-}
+
+// function light_al(lo, hi) 
+// {
+//     light_lo = false;
+//     light_hi = false;
+//     if (plant.plantData[plant.plantData.length -1].light <= lo)
+//     {
+//         light_lo = true;
+//     };
+//     if (plant.plantData[plant.plantData.length -1].light >= hi)
+//     {
+//         light_hi = true;
+//     };
+// }
+
+// function temp_al(lo, hi) 
+// {
+//     temp_lo = false;
+//     temp_hi = false;
+//     if (plant.plantData[plant.plantData.length -1].temp <= lo)
+//     {
+//         temp_lo = true;
+//     };
+//     if (plantData.data[plant.plantData.length -1].temp >= hi)
+//     {
+//         temp_hi = true;
+//     };
+// }
+
+// function hum_al(lo, hi) 
+// {
+//     hum_lo = false;
+//     hum_hi = false;
+//     if (plant.plantData[plant.plantData.length -1].humidity <= lo)
+//     {
+//         hum_lo = true;
+//     };
+//     if (plant.plantData[plant.plantData.length -1].humidity >= hi)
+//     {
+//         hum_hi = true;
+//     };
+// }
+
+// function moist_al(lo, hi) 
+// {
+//     moist_lo = false;
+//     moist_hi = false;
+//     if (plant.plantData[plant.plantData.length -1].moisture <= lo)
+//     {
+//         moist_lo = true;
+//     };
+//     if (plant.plantData[plant.plantData.length -1].moisture >= hi)
+//     {
+//         moist_hi = true;
+//     };
+// }
